@@ -1,4 +1,4 @@
-package com.endava.endGame;
+package com.endava.endgame;
 
 public enum ScenarioKeys {
     ID,

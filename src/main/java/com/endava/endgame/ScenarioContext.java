@@ -1,4 +1,4 @@
-package com.endava.endGame;
+package com.endava.endgame;
 
 import java.util.HashMap;
 import java.util.Map;
