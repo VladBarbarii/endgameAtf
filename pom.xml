@@ -12,9 +12,15 @@
         <hamcrest.version>2.2</hamcrest.version>
         <selenium.version>3.141.59</selenium.version>
         <cucumber.version>5.5.0</cucumber.version>
+        <shutterbug.version>0.9.3</shutterbug.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.assertthat</groupId>
+            <artifactId>selenium-shutterbug</artifactId>
+            <version>${shutterbug.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -24,7 +30,7 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
+            <scope>test,compile</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
