@@ -13,8 +13,6 @@ public class AdminHomePage {
     private WebElement timeSheetsTab;
     @FindBy(xpath = "//*[@id=\"menu_time_viewMyTimesheet\"]")
     private WebElement myTimesheetsTab;
-    @FindBy(xpath = "//*[@id=\"listOfActivities\"]/timesheet-items-day[1]/div[1]/div[2]/div[1]/a")
-    private WebElement addActivityButton;
 
     public AdminHomePage() {
         PageFactory.initElements(getDriver(), this);
@@ -30,10 +28,6 @@ public class AdminHomePage {
 
     public WebElement getTimeTab() {
         return timeTab;
-    }
-
-    public WebElement getAddActivityButton() {
-        return addActivityButton;
     }
 
 }
