@@ -1,19 +1,22 @@
 package com.endava.end_game.steps;
 
+import com.endava.end_game.AssertThatWrapper;
 import com.endava.end_game.ScenarioContext;
 import com.endava.end_game.ScenarioKeys;
 import com.endava.end_game.page_objects.LoginPage;
+import com.endava.end_game.page_objects.SystemAdminHomePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static com.endava.end_game.steps.GenericActions.click;
-import static com.endava.end_game.steps.GenericActions.enterValue;
+import static com.endava.end_game.steps.GenericActions.*;
+import static org.hamcrest.Matchers.is;
 
 public class GeneralSteps {
     private static final String allowedCharacters = "[^a-zA-Z0-9:]";
@@ -39,7 +42,7 @@ public class GeneralSteps {
         click(getElementByName(methodName));
     }
 
-    @And("User enters {string} in {string} field")
+    @When("User enters {string} in {string} field")
     public void enterValueInTheField(String value, String field) {
         String methodName = "get" + field;
         enterValue(getElementByName(methodName), value);
@@ -71,5 +74,56 @@ public class GeneralSteps {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
+    }
+
+    public void assertMessage(String methodName, String message) {
+        waitElement(getElementByName(methodName));
+        AssertThatWrapper.assertThat(getElementByName(methodName).getText(), is(message));
+    }
+
+    @Then("{string} message is displayed")
+    public void messageIsDisplayed(String message) {
+        String methodName = "get" + message + "Message";
+        assertMessage(methodName, message);
+    }
+
+    @Then("{string} message is displayed under {string} field")
+    public void messageIsDisplayedUnderField(String message, String field) {
+        String methodName = "get" + message + "MessageUnder" + field;
+        assertMessage(methodName, message);
+
+    }
+
+
+    @Then("{string} file is downloaded")
+    public void fileIsDownloaded(String fileName) {
+        String expectedMessage = "File is downloaded";
+        String home = System.getProperty("user.home");
+        String path = home + "/Downloads";
+        AssertThatWrapper.assertThat(isFileDownloaded(path, fileName), is(expectedMessage));
+    }
+
+    public String isFileDownloaded(String downloadPath, String fileName) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        File dir = new File(downloadPath);
+        File[] dirContents = dir.listFiles();
+
+        for (int i = 0; i < dirContents.length; i++) {
+            if (dirContents[i].getName().contains(fileName)) {
+                dirContents[i].delete();
+                return "File is downloaded";
+            }
+        }
+        return "File is not downloaded";
+    }
+    @And("User logout")
+    public void user_logout() {
+        SystemAdminHomePage systemAdminHomePage = new SystemAdminHomePage();
+        click(systemAdminHomePage.getSystemAdminTab());
+        click(systemAdminHomePage.getLogOutButton());
     }
 }
