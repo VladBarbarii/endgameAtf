@@ -9,9 +9,20 @@ import static com.endava.end_game.web_driver_singleton.WebDriverSingleton.getDri
 public class SystemAdminHomePage {
     @FindBy(xpath = "/html/body/div[1]/div/div/div[1]/div[2]/div[1]/div/div[4]/ul/li[1]/a/span[2]")
     private WebElement adminTab;
+
+    @FindBy(xpath = "//*[@id=\"menu_admin_viewAdminModule\"]/a/span[2]")
+    private WebElement admin1Tab;
+
+    public WebElement getConfigurationTab() {
+        return configurationTab;
+    }
+
+    public WebElement getEmailSettingsTab() {
+        return emailSettingsTab;
+    }
+
     @FindBy(xpath = "//*[@id=\"menu_admin_Configuration\"]")
     private WebElement configurationTab;
-
     @FindBy(xpath = "//*[@id=\"menu_admin_listMailConfiguration\"]/span[2]")
     private WebElement emailSettingsTab;
     @FindBy(xpath = "//*[@id=\"menu_admin_exportConfiguration\"]")
@@ -36,8 +47,23 @@ public class SystemAdminHomePage {
     private WebElement logOutButton;
     @FindBy(xpath = "//*[@id=\"user-dropdown\"]")
     private WebElement systemAdminTab;
+    @FindBy(xpath = "//*[@id=\"menu_admin_Job\"]/a/span[2]")
+    private WebElement jobTab;
+    @FindBy(xpath = "//*[@id=\"menu_admin_viewJobTitleList\"]/span[2]")
+    private WebElement jobTitlesTab;
+    @FindBy(xpath = "//*[@id=\"menu_pim_viewPimModule\"]")
+    private WebElement pimTab;
+    @FindBy(xpath = "//*[@id=\"menu_pim_viewEmployeeList\"]/span[2]")
+    private WebElement employeeListTab;
+    @FindBy(xpath = "//*[@id=\"menu_admin_workShift\"]/span[2]")
+    private WebElement workShiftsTab;
+
     public SystemAdminHomePage() {
         PageFactory.initElements(getDriver(), this);
+    }
+
+    public WebElement getAdmin1Tab() {
+        return admin1Tab;
     }
 
     public WebElement getLeaveListTab() {
@@ -76,6 +102,19 @@ public class SystemAdminHomePage {
         return exportTab;
     }
 
+
+    public WebElement getAdminTab() {
+        return adminTab;
+    }
+
+    public WebElement getJobTab() {
+        return jobTab;
+    }
+
+    public WebElement getJobTitlesTab() {
+        return jobTitlesTab;
+    }
+
     public WebElement getLogOutButton() {
         return logOutButton;
     }
@@ -84,15 +123,18 @@ public class SystemAdminHomePage {
         return systemAdminTab;
     }
 
-    public WebElement getAdminTab() {
-        return adminTab;
+    public WebElement getPimTab() {
+        return pimTab;
     }
 
-    public WebElement getConfigurationTab() {
-        return configurationTab;
+    public WebElement getEmployeeListTab() {
+        return employeeListTab;
     }
 
-    public WebElement getEmailSettingsTab() {
-        return emailSettingsTab;
+    public WebElement getWorkShiftsTab() {
+        return workShiftsTab;
     }
+
 }
+
+

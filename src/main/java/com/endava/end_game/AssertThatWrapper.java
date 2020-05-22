@@ -12,7 +12,7 @@ public class AssertThatWrapper {
 
     public static <T> void assertThat(final String message, final T actual, final Matcher<? super T> matcher) {
         final String fullMessage = "Assert that " + message;
-        final String logMessage = getAssertionExpectedActualMessage(fullMessage, String.valueOf(matcher), valueOf(actual));
+        final String logMessage = getAssertionExpectedActualMessage(fullMessage, valueOf(matcher), valueOf(actual));
         try {
             MatcherAssert.assertThat(fullMessage, actual, matcher);
             System.out.println(logMessage);

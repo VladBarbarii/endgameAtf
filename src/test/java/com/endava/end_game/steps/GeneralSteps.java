@@ -11,10 +11,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 
+import static com.endava.end_game.AssertThatWrapper.assertThat;
+import static org.hamcrest.Matchers.is;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import com.endava.end_game.AssertThatWrapper;
+
+import static com.endava.end_game.steps.GenericActions.*;
 import static com.endava.end_game.steps.GenericActions.*;
 import static org.hamcrest.Matchers.is;
 
@@ -120,10 +126,16 @@ public class GeneralSteps {
         }
         return "File is not downloaded";
     }
-    @And("User logout")
+    @Then("User logout")
     public void user_logout() {
         SystemAdminHomePage systemAdminHomePage = new SystemAdminHomePage();
         click(systemAdminHomePage.getSystemAdminTab());
         click(systemAdminHomePage.getLogOutButton());
+    }
+    @Then("{string} message is displayed on page")
+    public void messageIsDisplayedOnPage(String message) {
+        String methodName = "get" + message + "Message";
+        waitElement(getElementByName(methodName));
+        assertThat(getElementByName(methodName).getText(), is(message));
     }
 }
