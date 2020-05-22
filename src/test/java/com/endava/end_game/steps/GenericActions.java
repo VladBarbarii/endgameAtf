@@ -1,6 +1,7 @@
 package com.endava.end_game.steps;
 
 import com.endava.end_game.web_driver_singleton.WebDriverSingleton;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static com.endava.end_game.web_driver_singleton.WebDriverSingleton.getDriver;
 
@@ -30,6 +32,9 @@ public class GenericActions {
         waitElement(webElement);
         webElement.clear();
         webElement.sendKeys(value);
+    }
+    public static void getText(WebElement webElement){
+        webElement.getText().trim();
     }
     public static void refreshPage(){
         WebDriver driver = WebDriverSingleton.getDriver();

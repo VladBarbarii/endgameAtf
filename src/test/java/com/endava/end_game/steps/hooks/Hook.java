@@ -1,10 +1,10 @@
 package com.endava.end_game.steps.hooks;
 
+import com.endava.end_game.Screenshot;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.ConcurrentNavigableMap;
@@ -21,16 +21,12 @@ public class Hook {
         singleton.get(url);
         singleton.manage().window().maximize();
     }
-//
-//    @AfterStep
-//    public void afterStep(Scenario scenario){
-//        Screenshot.screenshot(getDriver(),scenario);
-//    }
-//    @AfterEach
-//    public s
-//    tatic void log(){
-//
-//    }
+
+    @AfterStep
+    public void afterStep(Scenario scenario) {
+        Screenshot.screenshot(getDriver(), scenario);
+    }
+
     @AfterAll
     public static void closeDriver() {
         getDriver().quit();
