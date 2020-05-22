@@ -1,5 +1,7 @@
 package com.endava.end_game.web_driver_singleton;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import java.io.FileInputStream;
@@ -8,6 +10,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class WebDriverSingleton {
+    private static Logger logger = LogManager.getLogger(WebDriverSingleton.class);
     private static WebDriverSingleton instance = null;
     private static WebDriver driver;
     public static String url;
@@ -22,10 +25,9 @@ public class WebDriverSingleton {
             String driverType = prop.getProperty("browser");
             url = prop.getProperty("sut_url");
             System.setProperty(prop.getProperty(driverType + "_driver"), prop.getProperty(driverType + "_path"));
-            System.out.println(prop.getProperty(driverType + "_driver")+prop.getProperty(driverType + "_path"));
             driver = DriverFactory.getDriver(driverType);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("File Not Found");
         }
     }
 
@@ -33,6 +35,7 @@ public class WebDriverSingleton {
         if (instance == null) {
             System.out.println("heloojwoiwho");
             instance = new WebDriverSingleton();
+            logger.info("New WebDriver's instance created");
         }
         return driver;
     }

@@ -17,7 +17,7 @@ public class LoginPage {
     private WebElement loginButton;
 
     public LoginPage() {
-        PageFactory.initElements(getDriver(),this);
+        PageFactory.initElements(getDriver(), this);
     }
 
     public WebElement getLoginRoleButton() {

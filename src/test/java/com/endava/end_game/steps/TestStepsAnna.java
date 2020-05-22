@@ -1,14 +1,14 @@
 package com.endava.end_game.steps;
+
 import com.endava.end_game.page_objects.JobTitlesPage;
-import com.endava.end_game.page_objects.SystemAdminHomePage;
 import com.endava.end_game.page_objects.WorkShiftsPage;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebElement;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.endava.end_game.AssertThatWrapper.assertThat;
-import static com.endava.end_game.steps.GenericActions.click;
 import static org.hamcrest.Matchers.contains;
 
 
@@ -18,7 +18,7 @@ public class TestStepsAnna {
         WorkShiftsPage workShiftsPage = new WorkShiftsPage();
         workShiftsPage.getWorkShift(0);
         List<String> workShifts = workShiftsPage.getWorkShiftNames().stream().map(WebElement::getText).collect(Collectors.toList());
-         assertThat("assert that new Work Shift has been added ", workShifts, contains(newWorkShift));
+        assertThat("assert that new Work Shift has been added ", workShifts, contains(newWorkShift));
     }
 
 //    @Then("User logout")

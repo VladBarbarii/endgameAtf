@@ -1,11 +1,15 @@
 package com.endava.end_game.web_driver_singleton;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
 
 public class SetProperties {
+    private static  Logger logger = LogManager.getLogger(SetProperties.class);
     public static void setProperties() {
         try (OutputStream output = new FileOutputStream("src/test/resources/application.properties")) {
             Properties prop = new Properties();
@@ -23,7 +27,7 @@ public class SetProperties {
             // save properties to project root folder
             prop.store(output, null);
         } catch (IOException io) {
-            io.printStackTrace();
+            logger.error("File Not Found");
         }
     }
 }

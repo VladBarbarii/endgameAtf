@@ -13,6 +13,8 @@ public class AdminHomePage {
     private WebElement timeSheetsTab;
     @FindBy(xpath = "//*[@id=\"menu_time_viewMyTimesheet\"]")
     private WebElement myTimesheetsTab;
+    @FindBy(xpath = "//a[@id='menu_recruitment_viewRecruitmentModule']/span[2]")
+    private WebElement recruitmentTab;
 
     public AdminHomePage() {
         PageFactory.initElements(getDriver(), this);
@@ -30,4 +32,7 @@ public class AdminHomePage {
         return timeTab;
     }
 
+    public WebElement getRecruitmentTab() {
+        return recruitmentTab;
+    }
 }
