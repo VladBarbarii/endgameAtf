@@ -13,9 +13,6 @@ public class Screenshot {
 
     //TODO stepNumber must be equal with number of scenario in run window
     public static void screenshot(WebDriver webDriver, Scenario scenario) {
-        if (!scenario.getName().equals(currentScenario)) {
-            stepNumber = 0;
-        } else currentScenario = scenario.getName();
         String separator = System.getProperty("file.separator");
         String target = "target" + separator + "screenshots" + separator;
         Shutterbug.shootPage(webDriver, ScrollStrategy.WHOLE_PAGE).withName(scenario.getName() + "_" + scenario.getLine() + "_" + stepNumber++).save(target);
