@@ -21,13 +21,6 @@ public class TestStepsAnna {
         assertThat("assert that new Work Shift has been added ", workShifts, contains(newWorkShift));
     }
 
-//    @Then("User logout")
-//    public void userLogout() {
-//        SystemAdminHomePage systemAdminHomePage = new SystemAdminHomePage();
-//        click(systemAdminHomePage.getSystemAdminTab());
-//        click(systemAdminHomePage.getLogOutButton());
-//    }
-
     @Then("New {string} has been added in JobTitle field")
     public void newNameHasBeenAddedInJobTitleField(String nameToFind) {
         JobTitlesPage jobTitlesPage = new JobTitlesPage();

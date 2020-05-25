@@ -1,17 +1,14 @@
 package com.endava.end_game.page_objects;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import static com.endava.end_game.web_driver_singleton.WebDriverSingleton.getDriver;
-
 public class CourseDetailsPage {
-
     public CourseDetailsPage() {
         PageFactory.initElements(getDriver(), this);
     }
-
+    @FindBy(xpath = "//*[@id=\"user-dropdown\"]")
+    private WebElement systemAdminTab;
     @FindBy(xpath = "//input[@id='addCourse_title']")
     private WebElement title;
     @FindBy(id = "addCourse_coordinator_empName")
@@ -32,42 +29,58 @@ public class CourseDetailsPage {
     private WebElement duration;
     @FindBy(id = "addCourse_cost")
     private WebElement cost;
+    @FindBy(xpath = "//*[@id=\"logoutLink\"]")
+    private WebElement logOutButton;
+    @FindBy(id = "addCourse_coordinator_empName-error")
+    private WebElement invalidMessageUnderCoordinator;
+    @FindBy(id = "addCourse_cost-error")
+    private WebElement shouldBeAValidNumberMessageUnderCost;
+    @FindBy(id = "addCourse_duration-error")
+    private WebElement ShouldbeavalidtimeinHHMMformatMessageUnderDuration;
+
+    public WebElement getDurationFormatMessageUnderDuration() {
+        return ShouldbeavalidtimeinHHMMformatMessageUnderDuration;
+    }
+    public WebElement getShouldBeAValidNumberMessageUnderCost() {
+        return shouldBeAValidNumberMessageUnderCost;
+    }
+    public WebElement getInvalidMessageUnderCoordinator() {
+        return invalidMessageUnderCoordinator;
+    }
+    public WebElement getLogOutButton() {
+        return logOutButton;
+    }
+    public WebElement getSystemAdminTab() {
+        return systemAdminTab;
+    }
 
     public WebElement getDuration() {
         return duration;
     }
-
     public WebElement getCost() {
         return cost;
     }
-
     public WebElement getCoursesTab() {
         return coursesTab;
     }
-
     public WebElement getSuccessfullyUpdatedMessage() {
         return successfullyUpdatedMessage;
     }
-
     public WebElement getName() {
         return name;
     }
     public WebElement getRequiredMessageUnderTitle() {
         return requiredMessageUnderTitle;
     }
-
     public WebElement getRequiredMessageUnderCoordinator() {
         return requiredMessageUnderCoordinator;
     }
-
     public WebElement getSaveButton() {
         return saveButton;
     }
-
     public WebElement getTitle() {
         return title;
     }
-
     public WebElement getCoordinator() {
         return coordinator;
     }

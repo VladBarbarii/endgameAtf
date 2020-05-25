@@ -9,18 +9,8 @@ import static com.endava.end_game.web_driver_singleton.WebDriverSingleton.getDri
 public class SystemAdminHomePage {
     @FindBy(xpath = "/html/body/div[1]/div/div/div[1]/div[2]/div[1]/div/div[4]/ul/li[1]/a/span[2]")
     private WebElement adminTab;
-
     @FindBy(xpath = "//*[@id=\"menu_admin_viewAdminModule\"]/a/span[2]")
     private WebElement admin1Tab;
-
-    public WebElement getConfigurationTab() {
-        return configurationTab;
-    }
-
-    public WebElement getEmailSettingsTab() {
-        return emailSettingsTab;
-    }
-
     @FindBy(xpath = "//*[@id=\"menu_admin_Configuration\"]")
     private WebElement configurationTab;
     @FindBy(xpath = "//*[@id=\"menu_admin_listMailConfiguration\"]/span[2]")
@@ -60,6 +50,14 @@ public class SystemAdminHomePage {
 
     public SystemAdminHomePage() {
         PageFactory.initElements(getDriver(), this);
+    }
+
+    public WebElement getConfigurationTab() {
+        return configurationTab;
+    }
+
+    public WebElement getEmailSettingsTab() {
+        return emailSettingsTab;
     }
 
     public WebElement getAdmin1Tab() {
@@ -134,7 +132,4 @@ public class SystemAdminHomePage {
     public WebElement getWorkShiftsTab() {
         return workShiftsTab;
     }
-
 }
-
-

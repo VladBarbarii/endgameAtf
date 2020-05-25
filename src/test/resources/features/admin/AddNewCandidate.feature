@@ -23,3 +23,4 @@ Feature: Add New Candidate
     And User clicks on 'Save' 'button'
     Then 'Successfully Saved' message is displayed
     And New candidate has been added
+    And User logout

@@ -37,9 +37,28 @@ public class MyTimesheetsPage {
     private WebElement firstOption;
     @FindBy(xpath = "//div[@id='preloader']")
     private WebElement preloader;
+    @FindBy(xpath="//span[contains(.,'Required')]")
+    private WebElement requiredMessageUnderActivity;
+    @FindBy(xpath = "//div[3]/materializecss-decorator/div/span/span[2]")
+    private WebElement requiredMessageUnderTo;
+
+    @FindBy(xpath = "//div[3]/materializecss-decorator/div/span/span[2]")
+    private WebElement requiredMessageUnderFrom;
 
     public MyTimesheetsPage() {
         PageFactory.initElements(getDriver(), this);
+    }
+
+    public WebElement getRequiredMessageUnderActivity() {
+        return requiredMessageUnderActivity;
+    }
+
+    public WebElement getRequiredMessageUnderTo() {
+        return requiredMessageUnderTo;
+    }
+
+    public WebElement getRequiredMessageUnderFrom() {
+        return requiredMessageUnderFrom;
     }
 
     public WebElement getAddActivityButton() {
@@ -51,7 +70,7 @@ public class MyTimesheetsPage {
     }
 
     public WebElement getActivityDropDown() {
-        waitElement(preloader, WaitCondition.INVISIBILITY);
+        waitElement(getPreloader(), WaitCondition.INVISIBILITY);
         return activityDropDown;
     }
 
@@ -93,5 +112,9 @@ public class MyTimesheetsPage {
 
     public WebElement getFirstOption() {
         return firstOption;
+    }
+
+    public WebElement getPreloader() {
+        return preloader;
     }
 }

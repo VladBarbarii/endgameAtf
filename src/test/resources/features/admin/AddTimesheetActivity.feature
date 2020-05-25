@@ -1,11 +1,24 @@
+@Andrei
 Feature: Add Timesheet Activity
 
   Background:
     Given User is logged in as 'Admin'
     And User is on 'Admin Home Page' page
-    And There is no 'Activity' added
+
+  Scenario: Add empty activity
+    When User clicks on 'Time' 'tab'
+    And User clicks on 'Timesheets' 'tab'
+    And User clicks on 'My Timesheets' 'tab'
+    And User is on 'My Timesheets Page' page
+    And User clicks on 'Add Activity' 'button'
+    And User clicks on 'Save' 'button'
+    Then 'Required' message is displayed under 'Activity' field
+    And 'Required' message is displayed under 'From' field
+    And 'Required' message is displayed under 'To' field
+    And User logout
 
   Scenario: Add first activity
+    Given There is no 'Activity' added
     When User clicks on 'Time' 'tab'
     And User clicks on 'Timesheets' 'tab'
     And User clicks on 'My Timesheets' 'tab'
@@ -23,3 +36,4 @@ Feature: Add Timesheet Activity
     And User clicks on 'Save' 'button'
     Then 'Successfully Saved' message is displayed
     And New activity has been added
+    And User logout

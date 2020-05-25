@@ -3,9 +3,9 @@ package com.endava.end_game.steps;
 import com.endava.end_game.AssertThatWrapper;
 import com.endava.end_game.ScenarioContext;
 import com.endava.end_game.ScenarioKeys;
-import com.endava.end_game.exceptions.MethodNotFoundException;
 import com.endava.end_game.page_objects.LoginPage;
 import com.endava.end_game.page_objects.SystemAdminHomePage;
+import com.endava.end_game.web_driver_singleton.WebDriverSingleton;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,19 +13,15 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-
-import java.io.File;
-import java.lang.reflect.Method;
 
 import static com.endava.end_game.AssertThatWrapper.assertThat;
 import static com.endava.end_game.steps.GenericActions.*;
 import static com.endava.end_game.web_driver_singleton.WebDriverSingleton.getDriver;
 import static org.hamcrest.Matchers.is;
 
-public class GeneralSteps {
+public class GeneralSteps  {
     private Logger logger = LogManager.getLogger(GeneralSteps.class);
-    private static final String PROHIBITED_CHARACTERS = "[^a-zA-Z0-9:]";
+    public static final String PROHIBITED_CHARACTERS = "[^a-zA-Z0-9:]";
     private static final String PAGE_OBJECTS_PACKAGE_NAME = "com.endava.end_game.page_objects.";
 
     @Given("User is logged in as {string}")
@@ -46,12 +42,14 @@ public class GeneralSteps {
     @When("User clicks on {string} {string}")
     public void clickOnTheElement(String element, String elementType) {
         try {
-            getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
+            if (getDriver().findElement(By.tagName("iframe")).isDisplayed()) {
+                getDriver().switchTo().frame(getDriver().findElement(By.tagName("iframe")));
+            }
         } catch (NoSuchElementException e) {
             logger.info("There is no iframe on this page");
         } finally {
             String methodName = "get" + element + elementType;
-            click(getElementByName(methodName));
+            click(GenericActions.getElementByName(methodName));
         }
         logger.info("User clicked " + element + " " + elementType);
     }
@@ -63,27 +61,7 @@ public class GeneralSteps {
         logger.info("User entered " + value + " in " + field);
     }
 
-    private WebElement getElementByName(String methodName) {
-        WebElement webElement = null;
-        methodName = methodName.replaceAll(PROHIBITED_CHARACTERS, "");
-        Object pageObj = ScenarioContext.getInstance().getData(ScenarioKeys.PAGE);
-        try {
-            Method[] methods = pageObj.getClass().getMethods();
-            for (Method method : methods) {
-                if (method.getName().toLowerCase().equals((methodName).toLowerCase())) {
-                    webElement = (WebElement) method.invoke(pageObj);
-                    logger.info("Method: " + method.getName() + " on " + pageObj.getClass() + " invoked");
-                }
-            }
-        } catch (Exception e) {
-            try {
-                throw new MethodNotFoundException();
-            } catch (MethodNotFoundException methodNotFoundException) {
-                logger.error("Method not found");
-            }
-        }
-        return webElement;
-    }
+
 
     @Then("User is on {string} page")
     public void getPageName(String pageName) {
@@ -94,10 +72,11 @@ public class GeneralSteps {
         } catch (ClassNotFoundException e) {
             logger.error("Class no found");
         } catch (IllegalAccessException e) {
-            logger.error("IllegalAccessExcpetion");
+            logger.error("IllegalAccessException");
         } catch (InstantiationException e) {
             logger.error("InstantiationError");
         }
+        logger.info("Current page in context: "+pageName);
     }
 
     @Then("{string} message is displayed")
@@ -112,30 +91,13 @@ public class GeneralSteps {
         String expectedMessage = "File is downloaded";
         String home = System.getProperty("user.home");
         String path = home + "/Downloads";
-        AssertThatWrapper.assertThat(isFileDownloaded(path, fileName), is(expectedMessage));
-    }
-
-    public String isFileDownloaded(String downloadPath, String fileName) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        File dir = new File(downloadPath);
-        File[] dirContents = dir.listFiles();
-
-        for (int i = 0; i < dirContents.length; i++) {
-            if (dirContents[i].getName().contains(fileName)) {
-                dirContents[i].delete();
-                return "File is downloaded";
-            }
-        }
-        return "File is not downloaded";
+        AssertThatWrapper.assertThat(GenericActions.isFileDownloaded(path, fileName), is(expectedMessage));
     }
 
     @Then("User logout")
     public void user_logout() {
         SystemAdminHomePage systemAdminHomePage = new SystemAdminHomePage();
+        getDriver().get(WebDriverSingleton.url);
         click(systemAdminHomePage.getSystemAdminTab());
         click(systemAdminHomePage.getLogOutButton());
     }

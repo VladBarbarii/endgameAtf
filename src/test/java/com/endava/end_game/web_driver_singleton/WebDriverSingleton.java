@@ -16,7 +16,6 @@ public class WebDriverSingleton {
     public static String url;
 
     private WebDriverSingleton(){
-
         InputStream input;
         try {
             input = new FileInputStream("src/test/resources/application.properties");
@@ -33,11 +32,14 @@ public class WebDriverSingleton {
 
     public static WebDriver getDriver(){
         if (instance == null) {
-            System.out.println("heloojwoiwho");
             instance = new WebDriverSingleton();
             logger.info("New WebDriver's instance created");
         }
         return driver;
+    }
+    public static void nullDriver(){
+        driver = null;
+        instance = null;
     }
 }
 

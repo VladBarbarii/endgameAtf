@@ -10,6 +10,7 @@ import static com.endava.end_game.web_driver_singleton.WebDriverSingleton.getDri
 
 public class CandidatesPage extends RecruitmentMenuPage {
     private WebElement clickable;
+    private static String currentSortedColumnXpath = "//*[@id=\"content\"]/div[8]/div/div[2]/table/tbody/tr/td[6]";
     private String nameValue = "Andrei Petrov";
     @FindBy(xpath = "//a[@id='addItemBtn']/i")
     private WebElement addCandidateButton;
@@ -36,16 +37,40 @@ public class CandidatesPage extends RecruitmentMenuPage {
     @FindBy(xpath = "//div[@id='toast-container']/div/div")
     private WebElement successfullySavedMessage;
     @FindBy(xpath = "//a[@id='candidateSearchBtn']/i")
-    private WebElement searchButton;
+    private WebElement searchMenu;
     @FindBy(xpath = "//input[@id='first_name']")
     private WebElement searchField;
-
-    public WebElement getSalesManagerOption() {
-        return salesManagerOption;
-    }
+    @FindBy(xpath = "//a[contains(text(),'Search')]")
+    private WebElement searchButton;
+    @FindBy(xpath = "//div[@id='content']/div[8]/div/div[2]/table/thead/tr/th[2]")
+    private WebElement sortByVacancy;
+    @FindBy(xpath = "//div[@id='content']/div[8]/div/div[2]/table/thead/tr/th[3]")
+    private WebElement sortByCandidate;
+    @FindBy(xpath = "//div[@id='content']/div[8]/div/div[2]/table/thead/tr/th[4]")
+    private WebElement sortByEmail;
+    @FindBy(xpath = "//div[@id='content']/div[8]/div/div[2]/table/thead/tr/th[5]")
+    private WebElement sortByContactNumber;
+    @FindBy(xpath = "//div[@id='content']/div[8]/div/div[2]/table/thead/tr/th[6]")
+    private WebElement sortByDateApplied;
+    @FindBy(xpath = "//div[@id='preloderDiv']")
+    private WebElement preloader;
+    @FindBy(xpath = "//i[@onclick=\"window.location.href = '/recruitment/exportCandidateApplicationFormPdf?candidateId=132'\"]")
+    private WebElement downloadApplicationFormButton;//unuseful
+    @FindBy(xpath = "//div[@id='content']/div[8]/div/div[2]/table/tbody/tr/td/label")
+    private WebElement candidateCheckbox;
+    @FindBy(xpath = "//a[@id='ohrmList_Menu']/i")
+    private WebElement listActionsButton;
+    @FindBy(xpath = "//a[contains(text(),'Delete')]")
+    private WebElement deleteItemButton;
+    @FindBy(xpath = "//a[contains(text(),'yes, delete')]")
+    private WebElement confirmDeleteButton;
 
     public CandidatesPage() {
         PageFactory.initElements(getDriver(), this);
+    }
+
+    public WebElement getSalesManagerOption() {
+        return salesManagerOption;
     }
 
     public WebElement getAddCandidateButton() {
@@ -99,25 +124,84 @@ public class CandidatesPage extends RecruitmentMenuPage {
     }
 
     private WebElement getElementByXpath(String xpath) {
-        return getDriver().findElement(By.xpath(xpath));
+        return (getDriver()).findElement(By.xpath(xpath));
     }
 
     public WebElement getSuccessfullySavedMessage() {
         return successfullySavedMessage;
     }
 
-    public WebElement getSearchButton() {
-        return searchButton;
+    public WebElement getSearchMenu() {
+        return searchMenu;
     }
 
     public WebElement getSearchField() {
         return searchField;
     }
 
-    public void setNameValue(String nameValue) {
-        this.nameValue = nameValue;
-    }
+
     public String getNameValue() {
         return nameValue;
+    }
+
+    public WebElement getSearchButton() {
+        return searchButton;
+    }
+
+    public WebElement getSortByVacancy() {
+        setCurrentSortedColumnXpath("//*[@id=\"content\"]/div[8]/div/div[2]/table/tbody/tr/td[2]");
+        return sortByVacancy;
+    }
+
+    public WebElement getSortByCandidate() {
+        setCurrentSortedColumnXpath("//*[@id=\"content\"]/div[8]/div/div[2]/table/tbody/tr/td[3]");
+        return sortByCandidate;
+    }
+
+    public WebElement getSortByEmail() {
+        setCurrentSortedColumnXpath("//*[@id=\"content\"]/div[8]/div/div[2]/table/tbody/tr/td[4]");
+        return sortByEmail;
+    }
+
+    public WebElement getSortByContactNumber() {
+        setCurrentSortedColumnXpath("//*[@id=\"content\"]/div[8]/div/div[2]/table/tbody/tr/td[5]");
+        return sortByContactNumber;
+    }
+
+    public WebElement getSortByDateApplied() {
+        setCurrentSortedColumnXpath("//*[@id=\"content\"]/div[8]/div/div[2]/table/tbody/tr/td[6]");
+        return sortByDateApplied;
+    }
+
+    public WebElement getPreloader() {
+        return preloader;
+    }
+
+    public String getCurrentSortedColumnXpath() {
+        return currentSortedColumnXpath;
+    }
+
+    public void setCurrentSortedColumnXpath(String currentSortedColumnXpath) {
+        CandidatesPage.currentSortedColumnXpath = currentSortedColumnXpath;
+    }
+
+    public WebElement getDownloadApplicationFormButton() {
+        return downloadApplicationFormButton;
+    }
+
+    public WebElement getCandidateCheckbox() {
+        return candidateCheckbox;
+    }
+
+    public WebElement getListActionsButton() {
+        return listActionsButton;
+    }
+
+    public WebElement getDeleteItemButton() {
+        return deleteItemButton;
+    }
+
+    public WebElement getConfirmDeleteButton() {
+        return confirmDeleteButton;
     }
 }
