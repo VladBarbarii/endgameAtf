@@ -14,6 +14,7 @@ import static com.endava.end_game.AssertThatWrapper.assertThat;
 import static com.endava.end_game.steps.GenericActions.*;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
+
 public class TestStepsVlad {
     private static final CoursesPage coursesPage = new CoursesPage();
     @Then("Course has been added")
@@ -29,7 +30,7 @@ public class TestStepsVlad {
         generalSteps.messageIsDisplayedUnderField(message, "coordinator");
         generalSteps.messageIsDisplayedUnderField(message, "title");
     }
-    @And("Admin user logs out")
+    @Then("Admin user logs out")
     public void adminUserLogsOut() {
         CourseDetailsPage courseDetailsPage = new CourseDetailsPage();
         click(courseDetailsPage.getSystemAdminTab());

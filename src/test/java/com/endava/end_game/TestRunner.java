@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com.endava.end_game.steps",
-        tags = {/*"@Andrei" +" or "+*/ "@Alina"+" or "+ "@Anna"/*+" or "+ "@Vlad"*/},
-        plugin = {"pretty","json:target/cucumber.json","html:target/site/cucumber-pretty"},
+        tags = {"@Andrei" + " or " + "@Alina" + " or " + "@Anna" + " or " + "@Vlad"},
+        plugin = {"pretty", "json:target/cucumber.json", "html:target/site/cucumber-pretty"},
         stepNotifications = true,
         monochrome = true
 )

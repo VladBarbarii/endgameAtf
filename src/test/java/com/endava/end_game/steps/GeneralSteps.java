@@ -62,7 +62,6 @@ public class GeneralSteps  {
     }
 
 
-
     @Then("User is on {string} page")
     public void getPageName(String pageName) {
         try {
